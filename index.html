@@ -9,6 +9,17 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <style>
+            #data-container {
+                margin-left: 5%;
+                margin-bottom: 3%;
+            }
+
+            #pagination-container {
+                margin-left: 5%;
+                margin-bottom: 3%;
+            }
+        </style>
     </head>
     <body>
         <div class="jumbotron text-center">
@@ -20,58 +31,116 @@
             <div id="pagination-container"></div>
         </div>
 
+        <div class="modal" id="userModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <img class="img-fluid rounded-circle shadow-lg border border-primary" id="photoLarge">
+                        <h4 class="modal-title"></h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="colUsername col-sm-12"></div>
+                            <div class="colEmail col-sm-12"></div>
+                            <div class="colDob col-sm-12"></div>
+                            <div class="colAge col-sm-12"></div>
+                            <div class="colCell col-sm-12"></div>
+                            <div class="colPhone col-sm-12"></div>
+                            <div class="colCity col-sm-12"></div>
+                            <div class="colCountry col-sm-12"></div>
+                          </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
         <script src="./paginationjs/src/pagination.js"></script>
         <script> 
             
-            $(document).ready(function () {
-                $('#pagination-container').pagination({
-                    dataSource: function(done) {
-                        $.ajax({
-                            type: 'GET',
-                            url: 'https://randomuser.me/api/?results=5000',
-                            success: function(response) {
-                                done(response.results);
-                            }
-                        });
-                    },
-                    locator: 'results',
-                    autoHidePrevious: true,
-                    autoHideNext: true,
-                    className: 'paginationjs-theme-blue',
-                    callback: function(data, pagination) {
-                        console.log('data' + data.name);
-                        let columnsHtml = ``;
-                        for(let x = 0; x < data.length; x++){
-                            let large = data[x]['picture']['large'];
-                            let thumbnail = data[x]['picture']['thumbnail'];
-                            let title = data[x]['name']['title'];
-                            let first = data[x]['name']['first'];
-                            let last = data[x]['name']['last'];
-                            let date = data[x]['dob']['date'];
-                            let age = data[x]['dob']['age'];
-                            let gender = data[x]['gender'];
-                            let cell = data[x]['cell'];
-                            let phone = data[x]['phone'];
-                            let email = data[x]['email'];
-                            let country = data[x]['location']['country'];
-                            let city = data[x]['location']['city'];
+            let columnsHtml = ``;
+            let large;
+            let thumbnail;
+            let title;
+            let first;
+            let last;
+            let date;
+            let age;
+            let gender;
+            let cell;
+            let phone;
+            let email;
+            let country;
+            let city;
 
-                            columnsHtml += `
-                            <div class="row mx-auto mb-3">
-                                <div class="col"><img class="img-fluid rounded-circle shadow-lg border border-primary" src="${thumbnail}"></div>
-                                <div class="col">Name: ${title+' '+ first +' '+last}</div>
-                                <div class="col">City: ${city}</div>
-                                <div class="col">Country: ${country}</div>
-                            </div>`;
-
+            $('#pagination-container').pagination({
+                dataSource: function(done) {
+                    $.ajax({
+                        type: 'GET',
+                        url: 'https://randomuser.me/api/?results=50',
+                        success: function(response) {
+                            done(response.results);
                         }
+                    });
+                },
+                locator: 'results',
+                autoHidePrevious: true,
+                autoHideNext: true,
+                className: 'paginationjs-theme-blue',
+                callback: function(data, pagination) {
+                    for(let x = 0; x < data.length; x++){
+                        large = data[x]['picture']['large'];
+                        thumbnail = data[x]['picture']['thumbnail'];
+                        title = data[x]['name']['title'];
+                        first = data[x]['name']['first'];
+                        last = data[x]['name']['last'];
+                        username = data[x]['login']['username'];
+                        date = data[x]['dob']['date'];
+                        age = data[x]['dob']['age'];
+                        gender = data[x]['gender'];
+                        cell = data[x]['cell'];
+                        phone = data[x]['phone'];
+                        email = data[x]['email'];
+                        country = data[x]['location']['country'];
+                        city = data[x]['location']['city'];
 
-                        $('#data-container').html(columnsHtml);
+                        let newDate = new Date(date);
+                        let dateFormat = `${newDate.getDate()}/${newDate.getMonth()}/${newDate.getFullYear()}`;
+                        
+                        $("#userModal #photoLarge").attr("src",data[x]['picture']['large']);
+                        $("#userModal .modal-title").text(`${data[x]['name']['title'] +' '+ data[x]['name']['first'] +' '+ data[x]['name']['last']}`); 
+                        $(".colUsername").text(`Username: ${username}`); 
+                        $(".colEmail").text(`Email: ${email}`); 
+                        $(".colDob").text(`Date of Birth: ${dateFormat}`); 
+                        $(".colAge").text(`Age: ${age}`); 
+                        $(".colCell").text(`Cell: ${cell}`); 
+                        $(".colPhone").text(`Phone: ${phone}`); 
+                        $(".colCity").text(`City: ${city}`); 
+                        $(".colCountry").text(`Country: ${country}`); 
+
+                        columnsHtml += `
+                        <div class="row mx-auto mb-3" id="openM">
+                            <div class="col" data-toggle="modal" and data-target="#userModal"><img class="img-fluid rounded-circle shadow-lg border border-primary" src="${thumbnail}"></div>
+                            <div class="col" data-toggle="modal" and data-target="#userModal">Full Name: ${title+' '+ first +' '+last}</div>
+                            <div class="col" data-toggle="modal" and data-target="#userModal">City: ${city}</div>
+                            <div class="col" data-toggle="modal" and data-target="#userModal">Country: ${country}</div>
+                        </div>`;
+            
                     }
-                });
-            });
+                    $('#data-container').html(columnsHtml);
 
+                }
+            });
         </script>
     </body>
 </html> 
