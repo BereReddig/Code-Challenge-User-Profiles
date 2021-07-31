@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>       
+        <meta charset="UTF-8">  
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Intive Code Challenge</title> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="jumbotron text-center">
+            <h1>User Profiles:</h1>
+        </div>
+            
+        <div class="container"></div>
+
+        <script> 
+            $.ajax({
+                url: 'https://randomuser.me/api/?results=50',
+                dataType: 'json',
+                success: function(data) {
+                    let dataLenght = Object.keys(data.results).length;
+
+                    let columnsHtml = ``;
+                    for(let x = 0; x < dataLenght; x++){
+                        let large = data.results[x]['picture']['large'];
+                        let thumbnail = data.results[x]['picture']['thumbnail'];
+                        let title = data.results[x]['name']['title'];
+                        let first = data.results[x]['name']['first'];
+                        let last = data.results[x]['name']['last'];
+                        let date = data.results[x]['dob']['date'];
+                        let age = data.results[x]['dob']['age'];
+                        let gender = data.results[x]['gender'];
+                        let cell = data.results[x]['cell'];
+                        let phone = data.results[x]['phone'];
+                        let email = data.results[x]['email'];
+                        let country = data.results[x]['location']['country'];
+                        let city = data.results[x]['location']['city'];
+
+                        columnsHtml += `
+                        <div class="row mx-auto mb-3">
+                            <div class="col"><img class="img-fluid rounded-circle shadow-lg border border-primary" src="${thumbnail}"></div>
+                            <div class="col">${title+' '+ first +' '+last}</div>
+                            <div class="col">${city}</div>
+                            <div class="col">${country}</div>
+                        </div>`;
+                    }
+                    $(".container").append(columnsHtml);
+                }
+            });
+        </script>
+    </body>
+</html> 
