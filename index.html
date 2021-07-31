@@ -119,14 +119,14 @@
                         
                         $("#userModal #photoLarge").attr("src",data[x]['picture']['large']);
                         $("#userModal .modal-title").text(`${data[x]['name']['title'] +' '+ data[x]['name']['first'] +' '+ data[x]['name']['last']}`); 
-                        $(".colUsername").text(`Username: ${username}`); 
-                        $(".colEmail").text(`Email: ${email}`); 
-                        $(".colDob").text(`Date of Birth: ${dateFormat}`); 
-                        $(".colAge").text(`Age: ${age}`); 
-                        $(".colCell").text(`Cell: ${cell}`); 
-                        $(".colPhone").text(`Phone: ${phone}`); 
-                        $(".colCity").text(`City: ${city}`); 
-                        $(".colCountry").text(`Country: ${country}`); 
+                        $(".colUsername").html(`<b>Username:</b> ${username}`); 
+                        $(".colEmail").html(`<b>Email:</b> ${email}`); 
+                        $(".colDob").html(`<b>Date of Birth:</b> ${dateFormat}`); 
+                        $(".colAge").html(`<b>Age:</b> ${age}`); 
+                        $(".colCell").html(`<b>Cell:</b> ${cell}`); 
+                        $(".colPhone").html(`<b>Phone:</b> ${phone}`); 
+                        $(".colCity").html(`<b>City:</b> ${city}`); 
+                        $(".colCountry").html(`<b>Country:</b> ${country}`); 
 
                         columnsHtml += `
                         <div class="row mx-auto mb-3" id="openM">
