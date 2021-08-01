@@ -29,13 +29,15 @@
             }
 
             #data-container {
-                width: 80%;
+                width: 95%;
                 margin: auto;
             }
 
             #pagination-container {
-                width: 80%;
+                width: 75%;
                 margin: auto;
+                margin-top: 2%;
+                margin-bottom: 2%;
             }
 
             .col {
@@ -144,10 +146,10 @@
 
                             columnsHtml += `
                                 <div class="row mx-auto mb-3 userColumn">
-                                    <div ${openM} class="col" data-toggle="modal" and data-target="#userModal"><img class="img-fluid rounded-circle shadow-lg border border-primary" src="${thumbnail}"></div>
-                                    <div ${openM} class="col" data-toggle="modal" and data-target="#userModal"><b>Full Name:</b> ${fullName}</div>
-                                    <div ${openM} class="col" data-toggle="modal" and data-target="#userModal"><b>City:</b> ${city}</div>
-                                    <div ${openM} class="col" data-toggle="modal" and data-target="#userModal"><b>Country:</b> ${country}</div>
+                                    <div ${openM} class="col text-center" data-toggle="modal" and data-target="#userModal"><img class="img-fluid rounded-circle shadow-lg border border-primary" src="${thumbnail}"></div>
+                                    <div ${openM} class="col text-center" data-toggle="modal" and data-target="#userModal"><b>Full Name:</b> ${fullName}</div>
+                                    <div ${openM} class="col text-center" data-toggle="modal" and data-target="#userModal"><b>City:</b> ${city}</div>
+                                    <div ${openM} class="col text-center" data-toggle="modal" and data-target="#userModal"><b>Country:</b> ${country}</div>
                                 </div>`;
                         });
 
