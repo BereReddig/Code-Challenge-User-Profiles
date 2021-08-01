@@ -9,10 +9,23 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Playfair+Display+SC:wght@700&family=Saira+Condensed:wght@700&display=swap" rel="stylesheet">
         <style>
             html, 
             body {
                 height: 100%;
+            }
+
+            h1 {
+                font-family: 'Orbitron', sans-serif;
+            }
+
+            .modal-title {
+                font-family: 'Orbitron', sans-serif;
+                padding-left: 15%;
+                padding-top: 6%;
             }
 
             #data-container {
@@ -41,7 +54,7 @@
     <body>
         <div class="container"></div>
             <div class="jumbotron text-center">
-                <h1>User Profiles:</h1>
+                <h1>User Profiles</h1>
             </div>
             
         
@@ -49,8 +62,8 @@
             <div id="pagination-container"></div>
         
 
-            <div class="modal" id="userModal">
-                <div class="modal-dialog">
+            <div class="modal fade" id="userModal">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
 
                         <!-- Modal Header -->
